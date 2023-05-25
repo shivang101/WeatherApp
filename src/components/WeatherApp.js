@@ -90,89 +90,88 @@ export default function WeatherApp() {
 
   };
 
+  return (
+    <>
+      <h1 className="text-5xl mt-0 pt-4 text-center font-bold my-8 text-white">
+        Weather App
+      </h1 >
 
-  return (<>
+      <form className="w-full lg:max-w-xl max-w-md mx-auto mt-10"
+        onSubmit={textValue === "Search by City" ? searchByZipCode : searchByCity}>
+        {flag &&
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <>
+              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label
+                  className="block uppercase tracking-wide text-white text-xl font-bold mb-2"
+                  htmlFor="grid-first-name"
+                >
+                  ZIP Code
+                </label>
+                <input
+                  className="appearance-none text-xl font-semibold block w-full bg-gray-200 text-gray-700 border-black border-2 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                  type="number"
+                  placeholder="Enter ZIP Code"
+                  onChange={(e) => setZipCode(e.target.value)}
+                  value={zipcode}
+                />
+              </div>
+              <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label
+                  className="block uppercase tracking-wide text-xl text-white  font-bold mb-2"
+                  htmlFor="grid-last-name"
+                >
+                  Country Code
+                </label>
+                <Country ref={countryRef} />
+              </div></>
+          </div>
+        }
 
-    <h1 className="text-5xl mt-0 pt-4 text-center font-bold my-8">
-      Weather App
-    </h1 >
+        {!flag && <div className="flex  mb-6">
 
-    <form className="w-full max-w-xl mx-auto mt-10"
-      onSubmit={textValue === "Search by City" ? searchByZipCode : searchByCity}>
-      {flag &&
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2"
-                htmlFor="grid-first-name"
-              >
-                ZIP Code
-              </label>
-              <input
-                className="appearance-none text-xl font-semibold block w-full bg-gray-200 text-gray-700 border-black border-2 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                type="number"
-                placeholder="Enter ZIP Code"
-                onChange={(e) => setZipCode(e.target.value)}
-                value={zipcode}
-              />
-            </div>
-            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-xl text-gray-700  font-bold mb-2"
-                htmlFor="grid-last-name"
-              >
-                Country Code
-              </label>
-              <Country ref={countryRef} />
-            </div></>
+          <div className="w-full md:w-1/2  mx-auto mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-white text-xl font-bold mb-2"
+              htmlFor="grid-first-name"
+            >
+              City Name
+            </label>
+            <input
+              className="appearance-none text-xl block w-full bg-gray-200 text-gray-700  border-black border-2 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+              type="text"
+              placeholder="Enter city name"
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
+            />
+          </div>
         </div>
-      }
+        }
 
-      {!flag && <div className="flex  mb-6">
+        {error && <div className="text-red-500">{error} </div>}
+        <div className="flex flex-col">
 
-        <div className="w-full md:w-1/2  mx-auto mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2"
-            htmlFor="grid-first-name"
+          <button
+            type="button"
+            className="px-4 w-1/2 py-1 mx-auto block my-10 text-xl font-semibold text-white uppercase bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600 cursor-pointer"
+            onClick={handleDisplay}
           >
-            City Name
-          </label>
-          <input
-            className="appearance-none text-xl block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            type="text"
-            placeholder="Enter city name"
-            onChange={(e) => setCity(e.target.value)}
-            value={city}
-          />
+            {textValue}
+          </button>
+          <button
+            type="submit"
+            className="px-4 w-1/2 py-1 mx-auto text-xl font-semibold text-white uppercase  bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+          >
+            Submit
+          </button>
         </div>
-      </div>
-      }
+      </form >
 
-      {error && <div className="text-red-500">{error} </div>}
-      <div className="flex flex-col">
+      {isLoading && <Loader />}
+      {weather && <Modal weather={weather} />}
 
-        <button
-          type="button"
-          className="px-4 w-1/2 py-1 mx-auto block my-10 text-xl font-semibold text-white uppercase bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600 cursor-pointer"
-          onClick={handleDisplay}
-        >
-          {textValue}
-        </button>
-        <button
-          type="submit"
-          className="px-4 w-1/2 py-1 mx-auto text-xl font-semibold text-white uppercase  bg-gray-700 rounded hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-        >
-          Submit
-        </button>
-      </div>
-    </form >
-
-    {isLoading && <Loader />}
-    {weather && <Modal weather={weather} />}
-
-    {/* {weather &&
+      {/* {weather &&
      
     } */}
-  </>);
+    </>);
 };
