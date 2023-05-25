@@ -4,7 +4,7 @@ const Country = forwardRef(function Country(props, ref) {
   return (
     <select
       ref={ref}
-      className="appearance-none block w-full bg-gray-200 text-gray-700 border-black border-2 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+      className="appearance-none text-xl font-semibold block w-full bg-gray-200 text-gray-700 border-black border-2 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
       defaultValue="IN"
     >
       <option>Select country</option>
