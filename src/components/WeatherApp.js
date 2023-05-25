@@ -5,7 +5,7 @@ import Loader from "./Loader";
 import Modal from "./Modal";
 
 export default function WeatherApp() {
-  const [zipcode, setZipCode] = useState("000000");
+  const [zipcode, setZipCode] = useState("");
   const [city, setCity] = useState("");
   const countryRef = useRef(null);
   const [error, setError] = useState(null);
@@ -39,7 +39,7 @@ export default function WeatherApp() {
       const json = await response.json();
       setIsLoading(false);
       setWeather(json);
-      setTimeout(() => setWeather(null), 5000);
+
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
@@ -78,7 +78,7 @@ export default function WeatherApp() {
       const weatherData = await forecast(result.lat, result.lon);
       setIsLoading(false);
       setWeather(weatherData);
-      setTimeout(() => setWeather(null), 5000);
+
 
     } catch (error) {
       setCity(" ");
@@ -90,12 +90,15 @@ export default function WeatherApp() {
 
   };
 
-  return (<>
-    <h1 className="text-5xl text-center font-bold my-8">
-      Weather App
-    </h1>
 
-    <form className="w-full max-w-2xl mx-auto mt-10" onSubmit={textValue === "Search by City" ? searchByZipCode : searchByCity}>
+  return (<>
+
+    <h1 className="text-5xl mt-0 pt-4 text-center font-bold my-8">
+      Weather App
+    </h1 >
+
+    <form className="w-full max-w-xl mx-auto mt-10"
+      onSubmit={textValue === "Search by City" ? searchByZipCode : searchByCity}>
       {flag &&
         <div className="flex flex-wrap -mx-3 mb-6">
           <>
@@ -164,7 +167,12 @@ export default function WeatherApp() {
         </button>
       </div>
     </form >
+
     {isLoading && <Loader />}
     {weather && <Modal weather={weather} />}
+
+    {/* {weather &&
+     
+    } */}
   </>);
 };

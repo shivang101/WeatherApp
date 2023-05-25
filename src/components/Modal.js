@@ -1,10 +1,18 @@
 import React from 'react';
 
 export default function Modal({ weather }) {
-  return (<div className=' fixed top-0 w-full z-20 grid place-items-center h-screen bg-[rgba(0,0,0,0.8)] overflow-hidden '>
-    <div className=' w-2/3 h-48 bg-transparent text-2xl text-white' >
-      {weather.name} feels like {Math.round(weather.main.temp_max - 272.15)}°C
-      <p>{weather.weather[0].description} winds are blowing at a speed of {weather.wind.speed} miles/hour and the visibility is {weather.visibility} metre</p>
+  return (<div className="flex flex-col w-full max-w-2xl mx-auto text-center mt-20 border-2 shadow-lg py-2">
+
+    <div className="text-5xl font-semibold tracking-wide">
+      <img className="md:h-44 h-28  mx-auto"
+        src="https://i.pinimg.com/originals/77/0b/80/770b805d5c99c7931366c2e84e88f251.png" />
+
+      <h5 className="mt-3 mx-auto">
+        {weather.name} {((weather.main.temp) - 273.15).toFixed(2)}°C
+      </h5>
+
+      <p className="font-semibold text-xl mt-8">{weather.weather[0].description} winds are blowing at a speed of {weather.wind.speed} miles/hour and the visibility is {weather.visibility} metre</p>
+
     </div>
   </div>);
 };
