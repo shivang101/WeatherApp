@@ -59,7 +59,7 @@ export default function WeatherApp() {
       let response;
       try {
 
-        const url = `http://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},${country}&appid=9a9189463659c4dd9b3e989bdd6de94e`;
+        const url = `https://api.openweathermap.org/geo/1.0/zip?zip=${zipcode},${country}&appid=9a9189463659c4dd9b3e989bdd6de94e`;
         setIsLoading(true);
         response = await fetch(url);
         json = await response.json();
